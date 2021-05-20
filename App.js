@@ -1,21 +1,62 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import  {MaterialIcons} from '@expo/vector-icons';
+import Identificacao from   './screens/Identificacao';
+import Agendamento from './screens/Agendamento';
+import { styleFormat } from './Css/Style';
+
+const pilha = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <NavigationContainer>
+      <pilha.Navigator initialRoute="TelaInicial">
+        <pilha.Screen
+          name="TelaInicial"
+          component={TelaInicial}
+          options={{ headerShown: false }}
+        />
+        <pilha.Screen name="Identificacao" component={Identificacao} />
+        <pilha.Screen name="Agendamento" component={Agendamento} />
+      </pilha.Navigator>
+    </NavigationContainer>
+  );
+}
+
+
+
+function TelaInicial({ navigation }) {
+  return (
+    <View style={styleFormat.container}>
+      <Image
+        source={
+          require("./AgendAi/logo.png")
+        }
+        style={styleFormat.logo}
+      />
+      <View style={styleFormat.btn}>
+        <TouchableOpacity
+          style={styleFormat.btn}
+          onPress={() => navigation.navigate("Identificacao")}
+        >
+          <MaterialIcons name="perm-identity" size={24} color="#FFFFFF" />
+          <Text style={styleFormat.txtbtn}>Identificação</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity
+          style={styleFormat.btn}
+          onPress={() => navigation.navigate("Agendamento")}
+        >
+        <MaterialIcons name="assignment" size={24} color="#FFFFFF" />
+          <Text style={styleFormat.txtbtn} >Agendamento</Text>
+        </TouchableOpacity>
+      </View>
       <StatusBar style="auto" />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
