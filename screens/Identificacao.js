@@ -34,7 +34,7 @@ export default function Identificacao() {
    direcionarAgendamento();
 
  }}
->
+
  
 </TouchableOpacity>
 </ScrollView>
