@@ -5,7 +5,7 @@ export const styleFormat = StyleSheet.create({
     
     width: '100%',
     height: '100%',
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#E0EEEE",
@@ -22,7 +22,8 @@ export const styleFormat = StyleSheet.create({
   btn: {  
     
     backgroundColor: "#063248",
-    
+    marginLeft:"auto",
+    marginRight: "auto",
     padding: 10,
     alignItems: "center",
     justifyContent: "center",
@@ -33,6 +34,28 @@ export const styleFormat = StyleSheet.create({
 
   txtbtn: {
       color:'#FFFFFF'
+  },
+
+  campos:{
+    
+    backgroundColor: "#FFFFFF",
+    padding: 10,
+    marginTop: 10,
+    marginBottom: 5,
+    shadowColor: "silver",
+    shadowOpacity: 1,
+    shadowRadius: 5,
+    shadowOffset: { width: 5, height: 5 },
+    elevation: 5,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+
+  txt:{
+    alignItems:"center",
+    padding:10,
+    marginTop:10,
+    color: "#063248"
   }
 
 });
