@@ -49,6 +49,23 @@ export const styleFormat = StyleSheet.create({
     elevation: 5,
     marginLeft: 10,
     marginRight: 10,
+    
+  },
+
+  data:{
+    backgroundColor: "#FFFFFF",
+    padding: 10,
+    marginTop: 10,
+    marginBottom: 5,
+    shadowColor: "silver",
+    shadowOpacity: 1,
+    shadowRadius: 5,
+    shadowOffset: { width: 5, height: 5 },
+    elevation: 5,
+    marginLeft: 10,
+    marginRight: 10,
+    width: 150,
+    height: 60,
   },
 
   txt:{

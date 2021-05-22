@@ -5,7 +5,9 @@ import { styleFormat } from '../Css/Style';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import DatePicker from "react-native-datepicker";
-import App from "../App";
+import { ipserver } from "../config/settings";
+
+import Confirmacao from "./Confirmacao";
 // import App from '../App'
 
 
@@ -17,7 +19,7 @@ return(
     <pilha.Navigator>
       <pilha.Screen name="AG" component={AG}
       options={{ headerShown: false }}/>
-      <pilha.Screen name="App" component={App}
+      <pilha.Screen name="Confirmacao" component={Confirmacao}
       options={{ headerShown: false }}/>
     </pilha.Navigator>
   </NavigationContainer>
@@ -40,18 +42,18 @@ function AG({navigation}){
     
     
     <TextInput style = {styleFormat.campos} 
-     placeholder="Serviço"
+     placeholder="Faça uma breve descrição do serviço desejado"
         keyboardType="default"      
     />
 
     <TextInput  style = {styleFormat.campos} 
-      placeholder="Pagamento"
+      placeholder="Insira a forma de pagamento"
         keyboardType="default"      
     />
 
 <DatePicker
                   value={validade}
-                  style={styleFormat.campos}
+                  style={styleFormat.data}
                   date={validade}
                   mode="date"
                   placeholder="Selecione a Data"
@@ -85,8 +87,10 @@ function AG({navigation}){
 
  {/* Fim da área de Identificação */}
 
- <TouchableOpacity onPress={()=>navigation.navigate("App")}
-                   style = {styleFormat.btn}>
+ <TouchableOpacity onPress={()=>navigation.navigate("Confirmacao")}
+                   style = {styleFormat.btn} >
+
+                            
       <Text style = {styleFormat.txtbtn}> 
         Agendar agora
       </Text>
@@ -97,3 +101,6 @@ function AG({navigation}){
 );
 }
 
+function agd () {
+  
+}
