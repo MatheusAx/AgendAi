@@ -1,1 +1,1 @@
-export const ipserver = "http://10.26.44.46:5521";
+export const ipserver = "http://10.26.47.25:5521";

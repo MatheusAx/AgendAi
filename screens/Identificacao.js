@@ -1,11 +1,18 @@
 import * as React from "react";
 import { View, Text, TextInput } from "react-native";
 import {TouchableOpacity, ScrollView} from 'react-native';
-import { StyleSheet } from "react-native";
 import { styleFormat } from '../Css/Style';
 import Agendamento from "./Agendamento";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import {ipserver} from "../config/settings";
+
+let nm = "";
+let tl = "";
+let em = "";
+
+
+
 
 const pilha = createStackNavigator();
 
@@ -28,9 +35,15 @@ export default function Identificacao() {
      );
 }
   function TelaIdf ({navigation}){
-     return (
+    
+    const [nome, setNome] = React.useState("");
+    const [telefone, setTelefone] = React.useState("");
+    const [email, setEmail] = React.useState("");
+    
+    return (
  <View style = {styleFormat.container}>
      <ScrollView horizontal={false}>    
+     {/* Cadastro das informações do usuario  */}
     <View >
     
     
@@ -41,26 +54,41 @@ export default function Identificacao() {
     
     <TextInput style = {styleFormat.campos} 
      placeholder="Nome"
-        keyboardType="default"      
+     value={nome}
+     keyboardType="default"
+     onChangeText={(value) => setNome(value)}
     />
 
     <TextInput  style = {styleFormat.campos} 
       placeholder="Telefone"
-        keyboardType="number-pad"      
+      value={telefone}
+      keyboardType="number-pad"
+      onChangeText={(value) => setTelefone(value)}      
     />
 
     <TextInput    style = {styleFormat.campos}
       placeholder="Email"      
-        keyboardType="email-address"      
+      value={email}
+      keyboardType="email-address"
+      onChangeText={(value) => setEmail(value)}      
     />
-
   </View>
   
 
 
  {/* Fim da área de Identificação */}
 
- <TouchableOpacity onPress={()=>navigation.navigate("Agendamento")}
+ <TouchableOpacity onPress={()=>{
+
+    nm = nome;
+    tl = telefone;
+    em = email;
+    efetuarCadastro();
+    alert("Cadastro efetuado!")
+
+
+   navigation.navigate("Agendamento")}}
+
                    style = {styleFormat.btn}
                    options={{ headerShown: false }}>
       <Text style = {styleFormat.txtbtn}> 
@@ -71,5 +99,28 @@ export default function Identificacao() {
 </ScrollView>
 </View>
 );
+}
+
+
+
+function efetuarCadastro () {
+  let idusuario = "";
+
+  fetch(`${ipserver}/usuario/cadastro`, {
+    method: "POST",
+    headers: {
+      accept: "application/json",
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      nome: nm,
+      telefone: tl,
+      email: em,
+      
+    }),
+  })
+    .then((response) => response.json())
+    .then((rs) => (idusuario = rs.output.insertId))
+    .catch((error) => console.error(`Erro ao tentar cadastrar -> ${error}`));
 }
 

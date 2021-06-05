@@ -19,7 +19,9 @@ export default function App() {
           component={TelaInicial}
           options={{ headerShown: false }}
         />
-        <pilha.Screen name="Identificacao" component={Identificacao} />
+        <pilha.Screen name="Identificacao" 
+        component={Identificacao}
+        options={{headerShown: false}} />
           </pilha.Navigator>
     </NavigationContainer>
   );

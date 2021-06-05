@@ -9,6 +9,20 @@ export const styleFormat = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#E0EEEE",
+    marginTop:50,
+    marginBottom:50
+  },
+
+  container2: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: "#ffffff",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#E0EEEE",
+    flex:1,
+    marginTop:30,
+    marginBottom:20
   },
 
   logo: {

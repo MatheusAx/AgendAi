@@ -11,10 +11,14 @@ import Confirmacao from "./Confirmacao";
 // import App from '../App'
 
 
+let sr = "";
+let pg = "";
+let dt = "";
+
 const pilha = createStackNavigator();
 
 export default function Agendamento() {
-return(
+  return(
   <NavigationContainer independent={true}>
     <pilha.Navigator>
       <pilha.Screen name="AG" component={AG}
@@ -28,7 +32,11 @@ return(
 }
 
 function AG({navigation}){
-    const [validade,setValidade] = React.useState("09-05-2021");
+  const [servico, setServico] = React.useState("");  
+  const [pagamento, setPagamento] = React.useState("");
+  const [data, setData] = React.useState("");
+
+  const [validade,setValidade] = React.useState("09-05-2021");
 
      return (
  <View style = {styleFormat.container}>
@@ -42,19 +50,30 @@ function AG({navigation}){
     
     
     <TextInput style = {styleFormat.campos} 
-     placeholder="Faça uma breve descrição do serviço desejado"
+        placeholder="Faça uma breve descrição do serviço desejado"
+        value={servico}
         keyboardType="default"      
+        onChangeText={(value) => setServico(value)}
     />
 
     <TextInput  style = {styleFormat.campos} 
-      placeholder="Insira a forma de pagamento"
-        keyboardType="default"      
+        placeholder="Insira a forma de pagamento"
+        value={pagamento}
+        keyboardType="default"  
+        onChangeText={(value) => setPagamento(value)}    
     />
 
-<DatePicker
+
+    <TextInput  style = {styleFormat.campos} 
+        placeholder="Insira a data do serviço desejado"
+        value={data}
+        keyboardType="default"  
+        onChangeText={(value) => setData(value)}    
+    />
+{/* <DatePicker
                   value={validade}
                   style={styleFormat.data}
-                  date={validade}
+                  date={data}
                   mode="date"
                   placeholder="Selecione a Data"
                   format="DD-MM-YYYY"
@@ -76,7 +95,7 @@ function AG({navigation}){
                   onDateChange={(date)=>{
                     setValidade(date)
                   }}
-                  />
+                  /> */}
 
             
     
@@ -87,7 +106,14 @@ function AG({navigation}){
 
  {/* Fim da área de Identificação */}
 
- <TouchableOpacity onPress={()=>navigation.navigate("Confirmacao")}
+ <TouchableOpacity onPress={()=>{
+   sr = servico;
+   pg = pagamento;
+   dt = data;
+   agd();
+   alert("Cadastro efetuado!")
+   
+   navigation.navigate("Confirmacao")}}
                    style = {styleFormat.btn} >
 
                             
@@ -102,5 +128,23 @@ function AG({navigation}){
 }
 
 function agd () {
-  
+  let idservico
+
+  fetch(`${ipserver}/servico/cadastro`, {
+    method: "POST",
+    headers: {
+      accept: "application/json",
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      servico: sr,
+      pagamento: pg,
+      agendamento: dt,
+    }),
+  })
+    .then((response) => response.json())
+    .then((rs) => (idservico = rs.output.insertId))
+    .catch((error) => console.error(`Erro ao tentar cadastrar -> ${error}`));
+
+
 }

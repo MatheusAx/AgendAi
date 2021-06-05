@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import { ipserver } from "../config/settings";
 import { styleFormat } from '../Css/Style';
 
@@ -20,19 +20,20 @@ const [dados, setDados]=React.useState([])
     },[])
   return (
     <View>
+    <ScrollView>
     {
         dados.map((item,index)=>(
-            <View style={styleFormat.container}>
+            <View style={styleFormat.container2}>
                 <Text> {item.Servico}</Text>
                 <Text> {item.Pagamento}</Text>
                 <Text> {item.Agendamento}</Text>
             </View>
         ))
     }
+    </ScrollView>
     </View>
 )};
-
-export default function listar2() {
+function listar2() {
     const [dados, setDados]=React.useState([])
     
         React.useEffect(()=>{
@@ -49,14 +50,17 @@ export default function listar2() {
         },[])
       return (
         <View>
+        <ScrollView>
+       
         {
             dados.map((item,index)=>(
-                <View style={styleFormat.container}>
+                <View style={styleFormat.container2}>
                     <Text> {item.Nome}</Text>
                     <Text> {item.Telefone}</Text>
                     <Text> {item.Email}</Text>
                 </View>
             ))
         }
+        </ScrollView>
         </View>
     )};
