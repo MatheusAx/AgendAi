@@ -36,8 +36,6 @@ function AG({navigation}){
   const [pagamento, setPagamento] = React.useState("");
   const [data, setData] = React.useState("");
 
-  const [validade,setValidade] = React.useState("09-05-2021");
-
      return (
  <View style = {styleFormat.container}>
      <ScrollView horizontal={false}>    
@@ -104,7 +102,7 @@ function AG({navigation}){
   
 
 
- {/* Fim da área de Identificação */}
+
 
  <TouchableOpacity onPress={()=>{
    sr = servico;
